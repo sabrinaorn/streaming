@@ -1,0 +1,76 @@
+body, html {
+  height: 100%;
+  color: orange;
+}
+
+h1, h2 {
+  color: green;
+}
+
+.personal {
+  color: #002a6e;
+}
+
+#viz {
+  opacity: 2.5
+}
+
+#viz:hover {
+  opacity: 1;
+}
+
+
+
+.head-image {
+  /* Use "linear-gradient" to add a darken background effect to the image to make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/MTA_Bus.jpg");
+
+  /* Set a specific height */
+  height: 60%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #CCCC;
+}
+
+.hero-head {
+  color: white;
+}
+
+
+/* The navigation bar */
+.navbar {
+ overflow: hidden;
+ background-color: #333;
+ position: fixed; /* Set the navbar to fixed position */
+ top: 10px; /* Position the navbar at the top of the page */
+ width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.navbar a {
+ float: left;
+ display: block;
+ color: #f2f2f2;
+ text-align: center;
+ padding: 14px 16px;
+ text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+ background: #ddd;
+ color: black;
+}

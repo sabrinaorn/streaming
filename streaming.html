@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Minimalistics GTFS-R</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=qhfYub-b9EMpaViI_wiIphLMJop-KeRBaNJRFJXP5Maqw6EIembUUqwk9MSmBUWXV7N8KGEUodwIqxWiaqUBihrOl_t0VVD_qlQBnIymqe1a7XuPLrWYj_tkCs0SS7sCVHIZ7WOA0wV4b-EcY2Za2A" charset="UTF-8"></script><script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/pbf@3.0.5/dist/pbf.js"></script>
+  <script src="https://unpkg.com/gtfs-realtime-pbf-js-module@1.0.0/gtfs-realtime.browser.proto.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+
+  <style>
+    html, body, #mapdiv {
+      margin: 0px;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+   <div id="mapdiv"></div>
+
+   <script type="text/javascript">
+
+      var map = L.map("mapdiv").setView([40.7128, - 74.0060], 12);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19
+      }).addTo(map);
+
+      var markergroup = new L.featureGroup();
+      map.on('click', function(e){
+              var coord = e.latlng;
+              var lat = coord.lat;
+              var lng = coord.lng;
+              var response = 'https://api.allorigins.win/get?url=' + encodeURIComponent('http://bustime.mta.info/api/where/stops-for-location.json?' + "lat=" + lat + "&lon=" + lng + "&latSpan=0.005&lonSpan=0.005&key=04bbe2d4-bf94-4ad3-8205-7d2015e41101")
+              $.getJSON(response,function(result) {temp=JSON.parse(result.contents)
+                  console.log(temp);
+                  len = temp['data']['stops'].length
+                  for (i = 0; i < len; i++){
+                      lat = temp['data']['stops'][i]['lat']
+                      long = temp['data']['stops'][i]['lon']
+                    var marker = L.marker([lat,long]).addTo(map)
+                    marker.bindPopup( "This stop is located at " +  temp['data']['stops'][i]['name']);
+                  }
+                 console.log(temp['data']['stops'].length)
+                });
+
+            })
+
+
+
+   </script>
+</body>
+</html>
